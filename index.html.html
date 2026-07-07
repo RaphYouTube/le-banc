@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Banc · Mode Carrière eFootball 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0b0c; --bg-alt:#111214; --surface:rgba(255,255,255,.035); --surface-hover:rgba(255,255,255,.06);
+  --border:rgba(255,255,255,.09); --text:#ece9e4; --text-dim:#a5a19b; --text-faint:#6c6864;
+  --gold:#d4af37; --gold-soft:rgba(212,175,55,.13); --pitch:#1c5c34; --pitch-light:#79c58f;
+  --pitch-soft:rgba(121,197,143,.13); --danger:#d1766e;
+  --display:'Bebas Neue',sans-serif; --body:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg); color:var(--text); font-family:var(--body); line-height:1.6;
+  overflow-x:hidden; -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.018) 0 1px, transparent 1px 120px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 120px);
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black 0%, transparent 70%);
+}
+::selection{background:var(--gold-soft); color:var(--gold);}
+a{color:inherit;}
+img,svg{display:block; max-width:100%;}
+.wrap{max-width:1080px; margin:0 auto; padding:0 28px; position:relative; z-index:1;}
+.eyebrow{
+  font-family:var(--body); font-size:11px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--gold); display:flex; align-items:center; gap:10px; margin-bottom:14px;
+}
+.eyebrow::before{content:""; width:22px; height:1px; background:var(--gold); opacity:.6;}
+h1,h2,h3{font-family:var(--display); letter-spacing:.01em; font-weight:400;}
+.section-title{font-size:clamp(30px,4.4vw,46px); line-height:1.05; margin-bottom:16px;}
+.section-lead{color:var(--text-dim); font-size:15.5px; max-width:560px; margin-bottom:6px;}
+.section{padding:118px 0; position:relative; border-top:1px solid var(--border);}
+.section:first-of-type{border-top:none;}
+
+/* ---------- reveal on scroll ---------- */
+.reveal{opacity:0; transform:translateY(26px); transition:opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);}
+.reveal.in{opacity:1; transform:translateY(0);}
+.reveal-delay-1.in{transition-delay:.08s;}
+.reveal-delay-2.in{transition-delay:.16s;}
+.reveal-delay-3.in{transition-delay:.24s;}
+
+/* ---------- side nav ---------- */
+.sidenav{
+  position:fixed; right:26px; top:50%; transform:translateY(-50%); z-index:50;
+  display:flex; flex-direction:column; gap:14px; align-items:flex-end;
+}
+.sidenav a{
+  display:flex; align-items:center; gap:10px; text-decoration:none; group:hover;
+}
+.sidenav .dot{width:7px; height:7px; border-radius:50%; background:var(--text-faint); transition:all .3s; flex-shrink:0;}
+.sidenav .lbl{
+  font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-faint);
+  opacity:0; transform:translateX(6px); transition:all .3s; white-space:nowrap; font-weight:600;
+}
+.sidenav a:hover .lbl, .sidenav a.active .lbl{opacity:1; transform:translateX(0); color:var(--text-dim);}
+.sidenav a.active .dot{background:var(--gold); box-shadow:0 0 8px rgba(212,175,55,.7); transform:scale(1.4);}
+@media (max-width:900px){ .sidenav{display:none;} }
+
+/* ---------- topbar ---------- */
+.topbar{
+  position:fixed; top:0; left:0; right:0; z-index:60; padding:18px 28px;
+  display:flex; justify-content:space-between; align-items:center;
+  background:linear-gradient(180deg, rgba(10,11,12,.92), rgba(10,11,12,0));
+  backdrop-filter:blur(6px);
+}
+.topbar .brand{font-family:var(--display); font-size:20px; letter-spacing:.06em;}
+.topbar .brand small{display:block; font-family:var(--body); font-size:9px; letter-spacing:.16em; color:var(--text-faint); font-weight:600; margin-top:-2px;}
+.topbar nav{display:flex; gap:26px;}
+.topbar nav a{font-size:12px; text-decoration:none; color:var(--text-dim); letter-spacing:.03em; transition:color .2s;}
+.topbar nav a:hover{color:var(--gold);}
+@media (max-width:760px){ .topbar nav{display:none;} }
+
+/* ---------- hero ---------- */
+.hero{
+  min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:150px 0 90px;
+  position:relative;
+}
+.hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center;}
+@media (max-width:920px){ .hero-grid{grid-template-columns:1fr;} }
+.hero h1{
+  font-size:clamp(56px,9vw,108px); line-height:.92; letter-spacing:.01em;
+  background:linear-gradient(180deg,#fff, #cfc9bd 65%, var(--gold));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  margin-bottom:20px;
+}
+.hero-sub{font-size:16.5px; color:var(--text-dim); max-width:460px; margin-bottom:34px;}
+.hero-sub b{color:var(--text); font-weight:600;}
+.cta-row{display:flex; gap:14px; flex-wrap:wrap; align-items:center;}
+.btn{
+  font-family:var(--body); font-weight:700; font-size:13.5px; letter-spacing:.02em;
+  padding:14px 24px; border-radius:10px; border:1px solid var(--border); cursor:pointer;
+  text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:all .25s;
+}
+.btn-primary{background:var(--gold); color:#181305; border-color:var(--gold);}
+.btn-primary:hover{background:#e6c454; transform:translateY(-2px); box-shadow:0 10px 26px rgba(212,175,55,.25);}
+.btn-ghost{color:var(--text); background:rgba(255,255,255,.02);}
+.btn-ghost:hover{background:var(--surface-hover); border-color:rgba(255,255,255,.2);}
+.hero-tags{display:flex; gap:9px; flex-wrap:wrap; margin-top:38px;}
+.hero-tag{
+  font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; font-weight:700; color:var(--text-faint);
+  border:1px solid var(--border); padding:6px 11px; border-radius:20px;
+}
+
+/* ---------- hero mockup (tilt + spotlight) ---------- */
+.tilt-wrap{ perspective:1200px; }
+.mock-panel{
+  position:relative; border-radius:20px; border:1px solid var(--border);
+  background:linear-gradient(155deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+  box-shadow:0 40px 80px -30px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.02) inset;
+  transform-style:preserve-3d; transition:transform .12s ease-out;
+  padding:20px; overflow:hidden;
+}
+.mock-panel::before{
+  content:""; position:absolute; inset:0; z-index:2; pointer-events:none; border-radius:20px;
+  background:radial-gradient(320px circle at var(--mx,50%) var(--my,20%), rgba(255,255,255,.10), transparent 60%);
+  opacity:0; transition:opacity .3s;
+}
+.tilt-wrap:hover .mock-panel::before{opacity:1;}
+.mock-topline{display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;}
+.mock-brand{font-family:var(--display); font-size:15px; letter-spacing:.04em; color:var(--text-dim);}
+.mock-pills{display:flex; gap:6px;}
+.mock-pill{font-size:9.5px; padding:4px 9px; border-radius:20px; background:rgba(255,255,255,.05); border:1px solid var(--border); color:var(--text-faint);}
+.mock-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+.mock-card{
+  background:rgba(255,255,255,.03); border:1px solid var(--border); border-radius:12px; padding:12px;
+}
+.mock-card h4{font-family:var(--body); font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-faint); font-weight:700; margin-bottom:9px;}
+.mock-line{height:7px; border-radius:4px; background:rgba(255,255,255,.07); margin-bottom:6px;}
+.mock-line.w60{width:60%;} .mock-line.w80{width:80%;} .mock-line.w40{width:40%;} .mock-line.w90{width:90%;}
+.mock-bar-bg{height:5px; border-radius:4px; background:rgba(255,255,255,.08); overflow:hidden; margin-top:8px;}
+.mock-bar{height:100%; border-radius:4px;}
+.mock-bar.gold{background:linear-gradient(90deg,#8f7420,var(--gold)); width:74%;}
+.mock-bar.green{background:linear-gradient(90deg,#3f8f5c,var(--pitch-light)); width:61%;}
+.mock-bar.blue{background:linear-gradient(90deg,#3f6f8f,#79b3c5); width:83%;}
+.mock-score{
+  display:flex; align-items:center; justify-content:space-between; margin-top:4px;
+  font-family:var(--display); font-size:20px; letter-spacing:.04em;
+}
+.mock-score span:nth-child(2){color:var(--pitch-light); font-size:15px;}
+.mock-dot{width:6px; height:6px; border-radius:50%; display:inline-block; margin-right:6px;}
+
+/* ---------- concept ---------- */
+.concept{text-align:center;}
+.concept .section-lead{max-width:680px; margin:0 auto; font-size:17px;}
+.concept h2{font-size:clamp(26px,3.6vw,38px); max-width:760px; margin:0 auto 22px;}
+.concept-strip{
+  display:flex; justify-content:center; gap:44px; margin-top:54px; flex-wrap:wrap;
+}
+.concept-stat{text-align:center;}
+.concept-stat .num{font-family:var(--display); font-size:40px; color:var(--gold); line-height:1;}
+.concept-stat .lbl{font-size:11px; color:var(--text-faint); letter-spacing:.05em; text-transform:uppercase; margin-top:6px;}
+
+/* ---------- feature sections ---------- */
+.feat{display:grid; grid-template-columns:.92fr 1.08fr; gap:64px; align-items:center;}
+.feat.rev{grid-template-columns:1.08fr .92fr;}
+.feat.rev .feat-text{order:2;}
+.feat.rev .feat-visual{order:1;}
+@media (max-width:900px){
+  .feat, .feat.rev{grid-template-columns:1fr;}
+  .feat.rev .feat-text{order:1;} .feat.rev .feat-visual{order:2;}
+}
+.feat-num{font-family:var(--display); font-size:13px; color:var(--text-faint); letter-spacing:.08em;}
+.feat ul{list-style:none; margin-top:22px; display:flex; flex-direction:column; gap:13px;}
+.feat li{display:flex; gap:12px; font-size:14px; color:var(--text-dim); align-items:flex-start;}
+.feat li b{color:var(--text); font-weight:600;}
+.feat li::before{content:"•"; color:var(--gold); flex-shrink:0; margin-top:1px; font-weight:700;}
+.feat-visual{position:relative;}
+.panel{
+  background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:22px;
+  backdrop-filter:blur(6px); transition:transform .35s, border-color .35s;
+}
+.panel:hover{border-color:rgba(255,255,255,.18);}
+
+/* mini calendar mock */
+.cal-mini{display:grid; grid-template-columns:repeat(7,1fr); gap:5px;}
+.cal-mini .d{
+  aspect-ratio:1; border-radius:6px; background:rgba(255,255,255,.035); border:1px solid var(--border);
+  font-size:9px; color:var(--text-faint); display:flex; align-items:flex-start; justify-content:flex-start; padding:4px;
+}
+.cal-mini .d.win{background:rgba(121,197,143,.22); border-color:rgba(121,197,143,.4); color:#bfe8cd;}
+.cal-mini .d.loss{background:rgba(209,118,110,.2); border-color:rgba(209,118,110,.4); color:#f0c4c0;}
+.cal-mini .d.euro{background:rgba(212,175,55,.16); border-color:rgba(212,175,55,.35); color:#ecd48a;}
+.cal-legend{display:flex; gap:14px; margin-top:14px; font-size:10px; color:var(--text-faint); flex-wrap:wrap;}
+.cal-legend span{display:flex; align-items:center; gap:5px;}
+.cal-legend i{width:8px; height:8px; border-radius:2px; display:inline-block;}
+.cal-mini-head{display:grid; grid-template-columns:repeat(7,1fr); gap:5px; margin-bottom:6px;}
+.cal-mini-head span{font-size:9px; text-align:center; color:var(--text-faint); letter-spacing:.06em; text-transform:uppercase; font-weight:700;}
+
+/* rule table (calendrier) */
+.rule-table{display:flex; flex-direction:column; gap:8px; margin-top:8px;}
+.rule-row{
+  display:flex; justify-content:space-between; align-items:center; gap:14px;
+  background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:12px 15px;
+}
+.rule-tag{font-size:13px; font-weight:600; color:var(--text);}
+.rule-tag.gold{color:var(--gold);}
+.rule-days{font-size:12px; color:var(--text-dim); text-align:right; white-space:nowrap;}
+.rule-days small{display:block; color:var(--text-faint); font-size:10px; margin-top:2px;}
+
+/* competitions mock */
+.comp-tabs{display:flex; gap:6px; margin-bottom:16px;}
+.comp-tab{font-size:10.5px; padding:7px 12px; border-radius:20px; border:1px solid var(--border); color:var(--text-faint);}
+.comp-tab.active{background:var(--gold-soft); border-color:var(--gold); color:var(--gold); font-weight:700;}
+.bracket{display:flex; justify-content:space-between; gap:8px;}
+.bracket-col{display:flex; flex-direction:column; justify-content:space-around; gap:8px; flex:1;}
+.bracket-box{
+  background:rgba(255,255,255,.03); border:1px solid var(--border); border-radius:7px; padding:7px 9px;
+  font-size:9.5px; color:var(--text-dim);
+}
+.bracket-box.win{border-color:rgba(212,175,55,.4); color:var(--gold);}
+
+/* press/social mock */
+.press-mini{display:flex; gap:10px; align-items:center; margin-bottom:14px;}
+.press-avatar{width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,var(--gold),#8f7420); flex-shrink:0;}
+.social-mini{background:rgba(255,255,255,.03); border:1px solid var(--border); border-radius:10px; padding:11px; margin-bottom:8px; font-size:11.5px; color:var(--text-dim);}
+.social-mini b{color:var(--text); font-size:11px;}
+
+/* finance mock */
+.fin-row{margin-bottom:12px;}
+.fin-row-top{display:flex; justify-content:space-between; font-size:11.5px; margin-bottom:5px;}
+.fin-row-top .amt-pos{color:var(--pitch-light); font-weight:700;}
+.fin-row-top .amt-neg{color:var(--danger); font-weight:700;}
+.fin-bar-bg{height:5px; background:rgba(255,255,255,.06); border-radius:4px; overflow:hidden;}
+.fin-bar{height:100%; border-radius:4px;}
+
+/* trust gauges */
+.trust-mock{display:flex; flex-direction:column; gap:18px;}
+.trust-mock .row{}
+.trust-mock .row-top{display:flex; justify-content:space-between; font-size:12px; margin-bottom:7px; color:var(--text-dim);}
+.trust-mock .bar-bg{height:8px; border-radius:5px; background:rgba(255,255,255,.06); overflow:hidden;}
+.trust-mock .bar{height:100%; border-radius:5px; width:0%; transition:width 1.4s cubic-bezier(.2,.8,.2,1);}
+.trust-mock.in .bar.b1{width:57%; background:linear-gradient(90deg,#8f7420,var(--gold));}
+.trust-mock.in .bar.b2{width:63%; background:linear-gradient(90deg,#3f8f5c,var(--pitch-light));}
+.trust-mock.in .bar.b3{width:49%; background:linear-gradient(90deg,#a3453d,var(--danger));}
+
+/* card row for "sous le capot" */
+.chip-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:28px;}
+.chip{
+  border:1px solid var(--border); border-radius:12px; padding:16px 18px; flex:1; min-width:180px;
+  background:var(--surface);
+}
+.chip .t{font-family:var(--display); font-size:16px; letter-spacing:.03em; margin-bottom:6px; color:var(--gold);}
+.chip .d{font-size:12.5px; color:var(--text-dim);}
+
+/* footer */
+footer{padding:90px 0 50px; text-align:center; border-top:1px solid var(--border);}
+footer .brand{font-family:var(--display); font-size:32px; letter-spacing:.05em; margin-bottom:10px;}
+footer p{color:var(--text-faint); font-size:12.5px; max-width:420px; margin:0 auto 30px;}
+footer .foot-links{display:flex; justify-content:center; gap:22px; font-size:11px; color:var(--text-faint); letter-spacing:.04em;}
+footer .foot-credit{margin-top:26px; font-size:11px; color:var(--text-faint); letter-spacing:.03em;}
+footer .foot-credit b{color:var(--text-dim); font-weight:600;}
+
+@media (max-width:600px){
+  .section{padding:80px 0;}
+  .hero{padding:120px 0 60px;}
+  .wrap{padding:0 20px;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">LE BANC<small>MODE CARRIÈRE · eFootball 2026</small></div>
+  <nav>
+    <a href="#bureau">Bureau</a>
+    <a href="#calendrier">Calendrier</a>
+    <a href="#competitions">Compétitions</a>
+    <a href="#finances">Finances</a>
+    <a href="#saison">Saison</a>
+    <a href="#acheter" style="color:var(--gold);">Acheter</a>
+  </nav>
+</div>
+
+<div class="sidenav" id="sidenav">
+  <a href="#hero" data-t="Intro"><span class="lbl">Intro</span><span class="dot"></span></a>
+  <a href="#bureau" data-t="Bureau"><span class="lbl">Bureau</span><span class="dot"></span></a>
+  <a href="#calendrier" data-t="Calendrier"><span class="lbl">Calendrier</span><span class="dot"></span></a>
+  <a href="#competitions" data-t="Compétitions"><span class="lbl">Compétitions</span><span class="dot"></span></a>
+  <a href="#presse" data-t="Presse"><span class="lbl">Presse</span><span class="dot"></span></a>
+  <a href="#finances" data-t="Finances"><span class="lbl">Finances</span><span class="dot"></span></a>
+  <a href="#confiance" data-t="Confiance"><span class="lbl">Confiance</span><span class="dot"></span></a>
+  <a href="#saison" data-t="Saison"><span class="lbl">Saison</span><span class="dot"></span></a>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow reveal in">Mode carrière non-officiel · eFootball 2026</div>
+      <h1 class="reveal in">LE<br>BANC</h1>
+      <p class="hero-sub reveal in">Le banc de touche, c'est le seul endroit du terrain où tu ne joues pas : tu <b>diriges</b>. Le Banc est un simulateur de carrière d'entraîneur complet, jouable directement dans ton navigateur, pensé pour habiller tes saisons eFootball d'une vraie vie de club.</p>
+      <div class="cta-row reveal in">
+        <a href="#bureau" class="btn btn-primary">Découvrir le logiciel ↓</a>
+        <a href="#saison" class="btn btn-ghost">Voir une saison complète</a>
+      </div>
+      <div class="hero-tags reveal in">
+        <span class="hero-tag">Fichier unique</span>
+        <span class="hero-tag">Aucune installation</span>
+        <span class="hero-tag">Hors-ligne</span>
+        <span class="hero-tag">Sauvegarde exportable</span>
+      </div>
+    </div>
+    <div class="tilt-wrap reveal in">
+      <div class="mock-panel" id="heroMock">
+        <div class="mock-topline">
+          <div class="mock-brand">BUREAU</div>
+          <div class="mock-pills"><span class="mock-pill">Note 3.8/5</span><span class="mock-pill">91 400 GP</span></div>
+        </div>
+        <div class="mock-grid">
+          <div class="mock-card">
+            <h4>Prochain événement</h4>
+            <div class="mock-line w80"></div>
+            <div class="mock-score"><span>RC Lens</span><span>vs</span><span>OM</span></div>
+            <div class="mock-line w40" style="margin-top:8px;"></div>
+          </div>
+          <div class="mock-card">
+            <h4>Confiance</h4>
+            <div class="mock-line w60"></div><div class="mock-bar-bg"><div class="mock-bar gold"></div></div>
+            <div class="mock-line w60" style="margin-top:9px;"></div><div class="mock-bar-bg"><div class="mock-bar green"></div></div>
+          </div>
+          <div class="mock-card">
+            <h4>Messagerie</h4>
+            <div class="mock-line w90"></div><div class="mock-line w60"></div>
+            <div class="mock-line w80" style="margin-top:10px;"></div><div class="mock-line w40"></div>
+          </div>
+          <div class="mock-card">
+            <h4>Finances</h4>
+            <div class="mock-line w40"></div><div class="mock-bar-bg"><div class="mock-bar blue"></div></div>
+            <div style="margin-top:10px;font-family:var(--display);font-size:22px;color:var(--pitch-light);">+3 240 GP</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONCEPT ============ -->
+<section class="section concept">
+  <div class="wrap">
+    <div class="eyebrow reveal" style="justify-content:center;">Le principe</div>
+    <h2 class="reveal">Tu ne joues pas les matchs. Tu joues <em style="color:var(--gold); font-style:normal;">tout le reste</em>.</h2>
+    <p class="section-lead reveal">Les scores, c'est toi qui les obtiens sur eFootball. Le Banc s'occupe de tout ce qu'un vrai coach gère entre deux rencontres : le calendrier, la Coupe Nationale, les trois compétitions européennes, la presse, le vestiaire, les finances et la confiance d'un club entier, saison après saison.</p>
+    <div class="concept-strip">
+      <div class="concept-stat reveal"><div class="num">45</div><div class="lbl">Clubs européens à répartir</div></div>
+      <div class="concept-stat reveal reveal-delay-1"><div class="num">3</div><div class="lbl">Compétitions continentales</div></div>
+      <div class="concept-stat reveal reveal-delay-2"><div class="num">15</div><div class="lbl">Types de décisions par mail</div></div>
+      <div class="concept-stat reveal reveal-delay-3"><div class="num">1</div><div class="lbl">Fichier, zéro serveur</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 01 BUREAU ============ -->
+<section class="section" id="bureau">
+  <div class="wrap feat">
+    <div class="feat-text reveal">
+      <div class="feat-num">01 · LE QUOTIDIEN</div>
+      <h2 class="section-title">Le Bureau</h2>
+      <p class="section-lead">Chaque journée démarre au même endroit : un tableau de bord qui tient sur un seul écran, sans avoir à chercher l'information.</p>
+      <ul>
+        <li><b>Objectifs multiples.</b> Choisis entre 1 et 4 objectifs de saison (sportifs, financiers, effectif, supporters), chacun avec sa propre jauge de progression et ses conseils.</li>
+        <li><b>Messagerie à vraies conséquences.</b> Demander un renfort médical ouvre directement la liste des médecins disponibles ; demander un geste à un sponsor modifie réellement ton budget. Aucun mail n'est décoratif.</li>
+        <li><b>Staff & effectif</b> gérés à la volée, avec des contrats, des effets concrets sur la fatigue, les blessures et la récupération.</li>
+      </ul>
+    </div>
+    <div class="feat-visual reveal reveal-delay-1">
+      <div class="panel">
+        <div class="mock-topline"><div class="mock-brand" style="font-size:13px;">Objectifs de saison</div><div class="mock-pill">2/4</div></div>
+        <div class="mock-card" style="margin-bottom:8px;"><h4>🎯 Terminer sur le podium</h4><div class="mock-bar-bg"><div class="mock-bar gold" style="width:68%;"></div></div></div>
+        <div class="mock-card"><h4>🎯 Budget en hausse</h4><div class="mock-bar-bg"><div class="mock-bar green" style="width:41%;"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 CALENDRIER ============ -->
+<section class="section" id="calendrier">
+  <div class="wrap feat rev">
+    <div class="feat-text reveal">
+      <div class="feat-num">02 · LE TEMPS QUI PASSE</div>
+      <h2 class="section-title">Un calendrier qui respecte le vrai football</h2>
+      <p class="section-lead">Rien n'est casé au hasard : chaque compétition a ses jours fixes, et le repos est toujours respecté.</p>
+      <div class="rule-table">
+        <div class="rule-row"><span class="rule-tag">⚽ Championnat</span><span class="rule-days">Ven · Sam · Dim<small>+ Lun en 2<sup>e</sup> division</small></span></div>
+        <div class="rule-row"><span class="rule-tag gold">🏆 Ligue des Champions</span><span class="rule-days">Mar · Mer</span></div>
+        <div class="rule-row"><span class="rule-tag gold">🌍 Europa & Conférence</span><span class="rule-days">Mer · Jeu</span></div>
+      </div>
+      <ul style="margin-top:26px;">
+        <li><b>Repos garanti.</b> Jamais moins de deux jours entre deux matchs, trois après un jeudi européen.</li>
+        <li><b>Domicile et extérieur</b> qui s'alternent naturellement, sans jamais enchaîner trois réceptions ou déplacements d'affilée.</li>
+      </ul>
+    </div>
+    <div class="feat-visual reveal reveal-delay-1">
+      <div class="panel">
+        <div class="cal-mini-head"><span>Lun</span><span>Mar</span><span>Mer</span><span>Jeu</span><span>Ven</span><span>Sam</span><span>Dim</span></div>
+        <div class="cal-mini">
+          <div class="d"></div><div class="d euro">1</div><div class="d">2</div><div class="d">3</div><div class="d win">4</div><div class="d">5</div><div class="d">6</div>
+          <div class="d">7</div><div class="d">8</div><div class="d euro">9</div><div class="d">10</div><div class="d">11</div><div class="d">12</div><div class="d loss">13</div>
+          <div class="d">14</div><div class="d">15</div><div class="d">16</div><div class="d">17</div><div class="d win">18</div><div class="d">19</div><div class="d">20</div>
+        </div>
+        <div class="cal-legend">
+          <span><i style="background:rgba(121,197,143,.5);"></i>Victoire</span>
+          <span><i style="background:rgba(209,118,110,.5);"></i>Défaite</span>
+          <span><i style="background:rgba(212,175,55,.45);"></i>Coupe d'Europe</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 COMPETITIONS ============ -->
+<section class="section" id="competitions">
+  <div class="wrap feat">
+    <div class="feat-text reveal">
+      <div class="feat-num">03 · LES TROPHÉES</div>
+      <h2 class="section-title">Coupe Nationale et 3 compétitions européennes</h2>
+      <p class="section-lead">Un format calqué sur le vrai calendrier continental, avec un ingrédient que tu ne trouveras nulle part ailleurs : tu choisis toi-même qui y participe.</p>
+      <ul>
+        <li><b>Draft européen à l'ouverture</b> : répartis 15 clubs dans la Ligue des Champions, 15 dans l'Europa League, 15 dans la Ligue Conférence, ou pars sur la répartition par défaut selon la force de chaque championnat.</li>
+        <li><b>Coupe Nationale fidèle au vrai règlement</b> : les clubs de seconde division passent un tour préliminaire, la première division entre directement dans le tableau.</li>
+        <li><b>Qualification par le classement</b> : chaque championnat affiche précisément quelles places mènent à quelle coupe d'Europe, bonus au vainqueur de la Coupe Nationale inclus.</li>
+        <li><b>Barrages de promotion</b> façon Championship anglaise pour les pays à deux divisions.</li>
+      </ul>
+    </div>
+    <div class="feat-visual reveal reveal-delay-1">
+      <div class="panel">
+        <div class="comp-tabs">
+          <div class="comp-tab active">Ligue des Champions</div><div class="comp-tab">Europa League</div><div class="comp-tab">Ligue Conf.</div>
+        </div>
+        <div class="bracket">
+          <div class="bracket-col">
+            <div class="bracket-box win">Ton club</div>
+            <div class="bracket-box">FC Porto</div>
+            <div class="bracket-box win">Ajax</div>
+            <div class="bracket-box">Galatasaray</div>
+          </div>
+          <div class="bracket-col">
+            <div class="bracket-box win">Ton club</div>
+            <div class="bracket-box win">Ajax</div>
+          </div>
+          <div class="bracket-col">
+            <div class="bracket-box win" style="border-color:var(--gold);">🏆 Finale</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 PRESSE / RESEAUX ============ -->
+<section class="section" id="presse">
+  <div class="wrap feat rev">
+    <div class="feat-text reveal">
+      <div class="feat-num">04 · L'IMAGE DU CLUB</div>
+      <h2 class="section-title">La presse et les réseaux ne dorment jamais</h2>
+      <p class="section-lead">Avant chaque match, une conférence de presse. Après chaque match, une autre. Et entre les deux, un vrai écosystème d'actualités.</p>
+      <ul>
+        <li><b>Des dizaines de questions</b> différentes en conférence, spécifiques à la victoire, la défaite, l'entre-saison ou la fin de championnat.</li>
+        <li><b>Des articles sur les autres championnats</b>, pas seulement le tien : la moitié des actualités concerne le reste du monde du football.</li>
+        <li><b>Réseaux sociaux vivants</b> : posts avant, pendant et après le match, commentaires, comptes officiels de clubs, mentions de tes sponsors.</li>
+      </ul>
+    </div>
+    <div class="feat-visual reveal reveal-delay-1">
+      <div class="panel">
+        <div class="press-mini"><div class="press-avatar"></div><div><div class="mock-line w60" style="margin-bottom:5px;"></div><div class="mock-line w40" style="height:5px;"></div></div></div>
+        <div class="mock-line w90"></div><div class="mock-line w80" style="margin-bottom:16px;"></div>
+        <div class="social-mini"><b>@TotalFootballFR</b> · Énorme performance ce soir, chapeau au coach 👏</div>
+        <div class="social-mini"><b>@VirageSud</b> · On y croit de plus en plus cette saison !</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 FINANCES ============ -->
+<section class="section" id="finances">
+  <div class="wrap feat">
+    <div class="feat-text reveal">
+      <div class="feat-num">05 · LE BUDGET</div>
+      <h2 class="section-title">Un onglet Finances à regarder, pas à gérer</h2>
+      <p class="section-lead">Gérer une masse salariale n'est pas le travail d'un entraîneur : le savoir, si. Cet onglet te montre tout, sans jamais te demander de trancher.</p>
+      <ul>
+        <li><b>Historique complet</b> des revenus de match, décisions par mail et recrutements de staff.</li>
+        <li><b>Dépenses mensuelles automatiques</b> : salaires de l'effectif, du staff et frais de fonctionnement, prélevés chaque mois comme dans un vrai club.</li>
+        <li><b>Sponsors visuels</b>, avec leurs avantages concrets, et le risque bien réel qu'ils se retirent si les résultats ne suivent plus.</li>
+      </ul>
+    </div>
+    <div class="feat-visual reveal reveal-delay-1">
+      <div class="panel">
+        <div class="fin-row"><div class="fin-row-top"><span>Revenus du jour de match</span><span class="amt-pos">+3 240 GP</span></div><div class="fin-bar-bg"><div class="fin-bar" style="width:78%;background:linear-gradient(90deg,#3f8f5c,var(--pitch-light));"></div></div></div>
+        <div class="fin-row"><div class="fin-row-top"><span>Salaires de l'effectif</span><span class="amt-neg">−2 100 GP</span></div><div class="fin-bar-bg"><div class="fin-bar" style="width:52%;background:linear-gradient(90deg,#a3453d,var(--danger));"></div></div></div>
+        <div class="fin-row"><div class="fin-row-top"><span>Recrutement staff médical</span><span class="amt-neg">−900 GP</span></div><div class="fin-bar-bg"><div class="fin-bar" style="width:24%;background:linear-gradient(90deg,#a3453d,var(--danger));"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 CONFIANCE ============ -->
+<section class="section" id="confiance">
+  <div class="wrap feat rev">
+    <div class="feat-text reveal">
+      <div class="feat-num">06 · LE POUVOIR EN SURSIS</div>
+      <h2 class="section-title">Trois jauges, jamais acquises</h2>
+      <p class="section-lead">Direction, joueurs, supporters : chaque décision les fait bouger, et elles s'érodent naturellement si tu ne t'en occupes pas.</p>
+      <ul>
+        <li><b>Aucune jauge ne reste bloquée à 100%</b> : la confiance demande un entretien constant, pas un pic ponctuel.</li>
+        <li><b>Sous les 35%</b>, les premières tensions apparaissent : mails d'avertissement, presse hostile.</li>
+        <li><b>Sous les 15%</b>, la crise devient publique, réseaux sociaux compris.</li>
+      </ul>
+    </div>
+    <div class="feat-visual reveal reveal-delay-1" id="trustVisual">
+      <div class="panel">
+        <div class="trust-mock" id="trustMock">
+          <div class="row"><div class="row-top"><span>Direction</span><span>57/100</span></div><div class="bar-bg"><div class="bar b1"></div></div></div>
+          <div class="row"><div class="row-top"><span>Joueurs</span><span>63/100</span></div><div class="bar-bg"><div class="bar b2"></div></div></div>
+          <div class="row"><div class="row-top"><span>Supporters</span><span>49/100</span></div><div class="bar-bg"><div class="bar b3"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 SAISON ============ -->
+<section class="section" id="saison">
+  <div class="wrap feat">
+    <div class="feat-text reveal">
+      <div class="feat-num">07 · LA SUITE</div>
+      <h2 class="section-title">Une carrière, pas un seul match</h2>
+      <p class="section-lead">La dernière journée jouée n'est jamais une fin, seulement un tournant.</p>
+      <ul>
+        <li><b>Une vraie réunion de fin de saison</b> avec la direction, qui décide de te maintenir ou de te remercier.</li>
+        <li><b>Des offres d'autres clubs</b> si ta saison a convaincu, ou la possibilité de rester bâtir ton projet.</li>
+        <li><b>Montée, descente et qualification européenne</b> recalculées sur ton classement réel, saison après saison : 2025-2026 devient 2026-2027, et ainsi de suite.</li>
+        <li><b>La Super Coupe d'Europe</b>, réservée à qui a vraiment soulevé un trophée continental l'année précédente.</li>
+      </ul>
+    </div>
+    <div class="feat-visual reveal reveal-delay-1">
+      <div class="panel" style="text-align:center; padding:34px 22px;">
+        <div style="font-size:38px; margin-bottom:10px;">🏁</div>
+        <div class="mock-brand" style="font-size:15px; margin-bottom:8px;">Fin de la saison 2025-2026</div>
+        <p style="font-size:12.5px; color:var(--text-dim); margin-bottom:18px;">Le rideau tombe sur cette saison. Place au bilan, à la réunion avec la direction, et aux décisions qui façonneront l'avenir du club.</p>
+        <div class="btn btn-primary" style="justify-content:center; width:100%;">Suivant →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOUS LE CAPOT ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow reveal">Sous le capot</div>
+    <h2 class="section-title reveal">Pensé pour être simple à ouvrir, difficile à lâcher</h2>
+    <p class="section-lead reveal">Aucune inscription, aucun serveur, aucune donnée envoyée nulle part. Le Banc tient dans un seul fichier que tu gardes pour toi.</p>
+    <div class="chip-row">
+      <div class="chip reveal"><div class="t">Fichier unique</div><div class="d">Tout le logiciel (moteur, données, interface) tient dans un seul fichier ouvert dans ton navigateur.</div></div>
+      <div class="chip reveal reveal-delay-1"><div class="t">Sauvegarde à toi</div><div class="d">Exporte ou importe ta carrière quand tu veux, sans dépendre d'un compte ou d'un cloud.</div></div>
+      <div class="chip reveal reveal-delay-2"><div class="t">Hors-ligne</div><div class="d">Une fois ouvert, aucune connexion n'est nécessaire pour jouer une saison entière.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACHETER ============ -->
+<section class="section" id="acheter" style="text-align:center;">
+  <div class="wrap">
+    <div class="eyebrow reveal" style="justify-content:center;">Se procurer Le Banc</div>
+    <h2 class="section-title reveal">Un fichier à toi, pour 9,90 €</h2>
+    <p class="section-lead reveal" style="margin:0 auto 32px;">Paiement unique et sécurisé via PayPal. 15% de chaque achat sont reversés à une association.</p>
+    <a href="https://www.paypal.com/ncp/payment/WYGW37NP2WD7J" target="_blank" rel="noopener" class="btn btn-primary reveal" style="font-size:15px; padding:16px 34px;">
+      Acheter Le Banc · 9,90 € <span style="opacity:.7;">↗</span>
+    </a>
+    <div class="chip-row" style="margin-top:44px;">
+      <div class="chip reveal"><div class="t">9,90 €</div><div class="d">Paiement unique. Le fichier t'appartient, sans abonnement.</div></div>
+      <div class="chip reveal reveal-delay-1"><div class="t">15 %</div><div class="d">Reversés à une association à chaque achat.</div></div>
+      <div class="chip reveal reveal-delay-2"><div class="t">🔒 PayPal</div><div class="d">Paiement sécurisé, aucune donnée bancaire conservée par Le Banc.</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">LE BANC</div>
+    <p>Un fichier. Un navigateur. Une carrière entière à écrire, une saison après l'autre.</p>
+    <div class="foot-links">
+      <span>Mode carrière non-officiel</span><span>eFootball 2026</span><span>Projet personnel</span>
+    </div>
+    <div class="foot-credit">Créé par <b>Raphpes</b> · v0.6</div>
+  </div>
+</footer>
+
+<script>
+// Reveal on scroll
+const revealEls = document.querySelectorAll('.reveal:not(.in)');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+}, {threshold:.15, rootMargin:"0px 0px -60px 0px"});
+revealEls.forEach(el=>io.observe(el));
+
+// Trust gauges fill when visible
+const trustMock = document.getElementById('trustMock');
+if(trustMock){
+  const io2 = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ trustMock.classList.add('in'); io2.unobserve(trustMock); } });
+  }, {threshold:.4});
+  io2.observe(trustMock);
+}
+
+// Hero mockup tilt + spotlight following mouse
+const heroMock = document.getElementById('heroMock');
+const tiltWrap = heroMock ? heroMock.closest('.tilt-wrap') : null;
+if(heroMock && tiltWrap){
+  tiltWrap.addEventListener('mousemove', (e)=>{
+    const r = heroMock.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width;
+    const py = (e.clientY - r.top) / r.height;
+    const rx = (py - 0.5) * -10;
+    const ry = (px - 0.5) * 14;
+    heroMock.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+    heroMock.style.setProperty('--mx', (px*100)+'%');
+    heroMock.style.setProperty('--my', (py*100)+'%');
+  });
+  tiltWrap.addEventListener('mouseleave', ()=>{
+    heroMock.style.transform = 'rotateX(0deg) rotateY(0deg)';
+  });
+}
+
+// Scrollspy for side nav
+const sections = ['hero','bureau','calendrier','competitions','presse','finances','confiance','saison'].map(id=>document.getElementById(id)).filter(Boolean);
+const navLinks = document.querySelectorAll('#sidenav a');
+const spy = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const id = entry.target.id;
+      navLinks.forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+id));
+    }
+  });
+}, {threshold:.5, rootMargin:"-10% 0px -55% 0px"});
+sections.forEach(s=>spy.observe(s));
+</script>
+</body>
+</html>
